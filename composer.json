@@ -1,0 +1,8 @@
+{
+	"name" : "battleship/battleship",
+	"autoload" : {
+		"psr-4" : {
+			"battleship\\" : "src"
+		}
+	}
+}
