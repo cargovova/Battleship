@@ -1,10 +1,23 @@
 <?php
 namespace controller;
 
-class Controller
+use model\Field;
+use iFace\iController;
+
+class Controller implements iController
 {
 
-    public function __construct()
-    {}
-}
+    private $field;
 
+    public function __construct()
+    {
+        $this->field = new Field();
+    }
+
+    public function checkHit($row, $column)
+    {
+        echo "<pre>";
+        var_dump($this->field->matrixCells[$row][$column]);
+        echo "</pre>";
+    }
+}

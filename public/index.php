@@ -1,12 +1,13 @@
 <?php
+use controller\Controller;
+
 require_once implode(DIRECTORY_SEPARATOR, [
     dirname(__DIR__),
     'vendor',
     'autoload.php'
 ]);
-use battleship\model\Field;
-$a = new Field();
 
-echo "<pre>";
-print_r($a);
-echo "</pre>";
+$controller = new Controller();
+$row = 0; // будет передаваться из html
+$column = 0; // будет передаваться из html
+$controller->checkHit($row, $column);

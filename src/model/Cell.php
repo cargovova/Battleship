@@ -1,44 +1,26 @@
 <?php
-namespace battleship\model;
+namespace model;
 
 class Cell
 {
 
-    const STATE = [
-        'emptyCell' => [ // нет корабля, не битая
-            'existShip' => false,
-            'hitShip' => false
-        ],
-        'miss' => [ // нет корабля, битая
-            'existShip' => false,
-            'hitShip' => false
-        ],
-        'healthy' => [ // есть корабль, не битая
-            'existShip' => true,
-            'hitShip' => false
-        ],
-        'broken' => [ // есть корабль, битая
-            'existShip' => true,
-            'hitShip' => true
-        ]
+    const CELL_STATE = [
+        'emptyIntactCell' => 'emptyIntactCell', // нет корабля, не битая
+        'wasted' => 'wasted',                   // нет корабля, битая
+        'intactShip' => 'intactShip',           // есть корабль, не битая
+        'miss' => 'miss'                        // есть корабль, битая
     ];
-
-    private $existShip;
-
-    private $hitShip;
 
     private $currentState;
 
     public function __construct($state)
     {
         $this->currentState = $state;
-        $this->setStates($this->currentState);
+        $this->setState($this->currentState);
     }
 
-    private function setStates($state)
+    public function setState($state)
     {
-        $state = 'emptyCell';
-        $this->existShip = self::STATE[$state]['existShip'];
-        $this->hitShip = self::STATE[$state]['hitShip'];
+        $this->currentState = self::CELL_STATE[$state];
     }
 }

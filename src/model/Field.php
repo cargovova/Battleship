@@ -1,5 +1,5 @@
 <?php
-namespace battleship\model;
+namespace model;
 
 class Field
 {
@@ -8,15 +8,23 @@ class Field
 
     const COUNT_COLUMN = 10;
 
-    private $cellsField;
+    public $matrixCells;
+
+    private $firstField;
+
+    private $secondField;
 
     public function __construct()
     {
         for ($row = 0; $row < self::COUNT_ROW; $row ++) {
             for ($column = 0; $column < self::COUNT_COLUMN; $column ++) {
-                $this->cellsField[$row][$column] = new Cell('emptyCell');
+                $this->matrixCells[$row][$column] = new Cell('emptyIntactCell');
             }
         }
+        $this->firstField = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'firstField.json';
+        $this->secondField = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'secondField.json';
+    
+        file_put_contents($this->firstField, json_encode($this->matrixCells));
+        file_put_contents($this->secondField, json_encode($this->matrixCells));
     }
 }
-
