@@ -1,8 +1,8 @@
 <?php
-namespace controller;
+namespace src\controller;
 
-use model\Field;
-use iFace\iController;
+use src\iFace\iController;
+use src\model\Field;
 
 class Controller implements iController
 {

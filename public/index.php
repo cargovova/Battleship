@@ -1,13 +1,13 @@
 <?php
-use controller\Controller;
-
 require_once implode(DIRECTORY_SEPARATOR, [
     dirname(__DIR__),
     'vendor',
     'autoload.php'
 ]);
 
+use src\controller\Controller;
+
 $controller = new Controller();
-$row = 0; // будет передаваться из html
-$column = 0; // будет передаваться из html
-$controller->checkHit($row, $column);
+$row = 0;
+$column = 0;
+$controller ->checkHit($row, $column);

@@ -1,3 +1,4 @@
+'use strict';
 const field = document.getElementById('field');
 
 const cells = [];
@@ -17,7 +18,20 @@ for (let row = 0; row < 10; row++) {
 }
 
 function clickHandler(e) {
-    console.log(e.target.getAttribute('x'));
-    console.log(e.target.getAttribute('y'));
+    console.log(e.target.getAttribute('x')); // Вывод в консоль
+    console.log(e.target.getAttribute('y')); // Вывод в консоль
     e.target.innerHTML = O;
+    
+    const x =e.target.getAttribute('x');
+    const y =e.target.getAttribute('y');
+    fetch('http://localhost:8080?x=' + x + '&y=' + y)
+    .then(response => {
+	return response.json()
+	})
+	.then(data => {
+	    console.log(data);
+	})
+	.catch(err => {
+	    console.error(err);
+	});
 }

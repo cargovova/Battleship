@@ -1,5 +1,5 @@
 <?php
-namespace model;
+namespace src\model;
 
 class Cell
 {
@@ -22,5 +22,8 @@ class Cell
     public function setState($state)
     {
         $this->currentState = self::CELL_STATE[$state];
+    }
+    public function getState ($state) {
+        $state;
     }
 }

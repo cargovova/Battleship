@@ -1,5 +1,5 @@
 <?php
-namespace iFace;
+namespace src\iFace;
 
 interface iController
 {
