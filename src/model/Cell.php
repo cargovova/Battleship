@@ -11,7 +11,7 @@ class Cell
         'miss' => 'miss'                        // есть корабль, битая
     ];
 
-    private $currentState;
+    public $currentState;
 
     public function __construct($state)
     {

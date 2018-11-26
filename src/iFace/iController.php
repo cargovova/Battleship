@@ -3,5 +3,5 @@ namespace src\iFace;
 
 interface iController
 {
-    public function checkHit($row, $column);
+    public function action($row, $column);
 }
