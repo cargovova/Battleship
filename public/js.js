@@ -18,18 +18,22 @@ for (let row = 0; row < 10; row++) {
 }
 
 function clickHandler(e) {
-    console.log(e.target.getAttribute('x')); // Вывод в консоль
-    console.log(e.target.getAttribute('y')); // Вывод в консоль
-    e.target.innerHTML = O;
-    
+
     const x =e.target.getAttribute('x');
     const y =e.target.getAttribute('y');
-    fetch('http://localhost:8080?x=' + x + '&y=' + y)
+    const fieldNumber = 'firstField';
+    console.log(x,y);
+    fetch('http://battleship.local?x=' + x + '&y=' + y + '&fieldNumber=' + fieldNumber)
     .then(response => {
 	return response.json()
 	})
 	.then(data => {
 	    console.log(data);
+	    if(data.result) {
+		e.target.innerHTML = 'O'; // это большая о.
+	    } else {
+		console.error('error');
+	    }
 	})
 	.catch(err => {
 	    console.error(err);

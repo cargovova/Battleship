@@ -10,13 +10,18 @@ use src\controller\Controller;
 $controller = new Controller();
 
 // аргументы функции из js
-$fieldNumber = 1;
-$row = 1;
-$column = 1;
-$state = 'intactShip';
-$controller->setState($fieldNumber, $row, $column, $state);
+// $fieldNumber = 1;
+// $row = $_REQUEST['y'];
+// $column = $_REQUEST['x'];
+// $state = 'intactShip';
+// $answer = $controller->setState($fieldNumber, $row, $column, $state);
+
 
 // аргументы функции из js
-$row = 0;
-$column = 0;
-$controller ->action($row, $column);
+$row = $_REQUEST['y'];
+$column = $_REQUEST['x'];
+$fieldNumber = $_REQUEST['fieldNumber'];
+$answer = $controller ->action($fieldNumber, $row, $column);
+
+header('application/json');
+echo json_encode($answer);

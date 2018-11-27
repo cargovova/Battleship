@@ -14,18 +14,27 @@ class Controller implements iController
         // инициализация поля с пустыми ячейками
         $this->field = new Field();
     }
+
     // задаём положения кораблей
-    public function setState($fieldNumber, $row, $column, $state) {
-        $this->field->setFieldState($fieldNumber, $row, $column, $state);
-    }
-    // игра
-    public function action($row, $column)
+    public function setState($fieldNumber, $row, $column, $state)
     {
-        if ($this->field->matrixCells[$row][$column]->currentState === 'emptyIntactCell') {
-            echo "HI";
+        $this->field->setFieldState($fieldNumber, $row, $column, $state);
+        return [
+            result => false
+        ];
+    }
+
+    // игра. Проблема с fieldNumber. Если поставить вместо него firstField - всё работает.
+    public function action($fieldNumber, $row, $column)
+    {
+        if ($this->field->$fieldNumber[$row][$column]->currentState === 'emptyIntactCell') {
+            return  [
+                result => 'wasted'
+            ];
+        } elseif ($this->field->$fieldNumber[$row][$column]->currentState === 'intactShip') {
+            return [
+                result => 'miss'
+            ];
         }
-        echo "<pre>";
-        var_dump($this->field->matrixCells[$row][$column]);
-        echo "</pre>";
     }
 }
