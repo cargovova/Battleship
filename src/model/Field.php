@@ -5,13 +5,10 @@ class Field
 {
 
     const COUNT_ROW = 10;
-
     const COUNT_COLUMN = 10;
 
     public $matrixCells;
-
     public $firstField;
-
     public $secondField;
 
     public function __construct()
@@ -24,13 +21,23 @@ class Field
             }
         }
     }
-    // задаём по одному одиночному кораблю в каждом поле.
+
+    // Записываем в ячейку корабль.
     public function setFieldState($fieldNumber, $row, $column, $state)
     {
-        if ($fieldNumber === 1) {
-            $this->firstField[$row][$column] = new Cell($state);
-        } elseif ($fieldNumber ===2) {
-            $this->secondField[$row][$column] = new Cell($state);
+        $this->$fieldNumber[$row][$column]->currentState = $state;
+    }
+    // Получаем значение битой ячейки.
+    public function getFieldState($fieldNumber, $row, $column)
+    {
+        if ($this->$fieldNumber[$row][$column]->currentState === 'emptyIntactCell') {
+            return [
+                result => 'wasted'
+            ];
+        } elseif ($this->$fieldNumber[$row][$column]->currentState === 'intactShip') {
+            return [
+                result => 'miss'
+            ];
         }
     }
 }

@@ -23,7 +23,4 @@ class Cell
     {
         $this->currentState = self::CELL_STATE[$state];
     }
-    public function getState ($state) {
-        $state;
-    }
 }

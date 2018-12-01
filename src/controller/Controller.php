@@ -19,22 +19,11 @@ class Controller implements iController
     public function setState($fieldNumber, $row, $column, $state)
     {
         $this->field->setFieldState($fieldNumber, $row, $column, $state);
-        return [
-            result => false
-        ];
     }
 
     // игра. Проблема с fieldNumber. Если поставить вместо него firstField - всё работает.
     public function action($fieldNumber, $row, $column)
     {
-        if ($this->field->$fieldNumber[$row][$column]->currentState === 'emptyIntactCell') {
-            return  [
-                result => 'wasted'
-            ];
-        } elseif ($this->field->$fieldNumber[$row][$column]->currentState === 'intactShip') {
-            return [
-                result => 'miss'
-            ];
-        }
+        return $this->field->getFieldState($fieldNumber, $row, $column);
     }
 }
