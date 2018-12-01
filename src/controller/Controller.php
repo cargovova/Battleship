@@ -7,7 +7,7 @@ use src\model\Field;
 class Controller implements iController
 {
 
-    public $field;
+    private $field;
 
     public function __construct()
     {

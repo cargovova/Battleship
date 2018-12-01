@@ -19,7 +19,7 @@ class Cell
         $this->setState($this->currentState);
     }
 
-    public function setState($state)
+    private function setState($state)
     {
         $this->currentState = self::CELL_STATE[$state];
     }

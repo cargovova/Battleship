@@ -7,9 +7,9 @@ class Field
     const COUNT_ROW = 10;
     const COUNT_COLUMN = 10;
 
-    public $matrixCells;
-    public $firstField;
-    public $secondField;
+    private $matrixCells;
+    private $firstField;
+    private $secondField;
 
     public function __construct()
     {
@@ -27,6 +27,7 @@ class Field
     {
         $this->$fieldNumber[$row][$column]->currentState = $state;
     }
+
     // Получаем значение битой ячейки.
     public function getFieldState($fieldNumber, $row, $column)
     {
