@@ -1,12 +1,14 @@
 <?php
 
 namespace src\model;
+
 /**
- * @author vova
  *
+ * @author vova
+ *        
  * Класс для одной ячейки поля.
  * Есть set и get.
- *
+ *        
  */
 class Cell {
 	/**
@@ -21,10 +23,9 @@ class Cell {
 	 * @param string $state
 	 * Задаём ячейке пустое значение при инициализации
 	 */
-	public function __construct($state) {
-		if ($state === null){
-		$this->currentState = self::CELL_STATE['empty'];
-		$this->setState($this->currentState);
+	public function __construct() {
+		if ($this->currentState === null) {
+			$this->setState($this->currentState);
 		}
 	}
 	/**

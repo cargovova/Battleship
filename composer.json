@@ -4,5 +4,8 @@
 		"psr-4" : {
 			"src\\" : "src"
 		}
+	},
+	"require": {
+		"filp/whoops": "^2.3"
 	}
 }
