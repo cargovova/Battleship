@@ -11,22 +11,24 @@ namespace src\model;
  *        
  */
 class Cell {
+
 	/**
+	 * @var string
 	 * @var array
 	 */
-	const CELL_STATE = [ 
+	const BEGIN_CELL_STATE = 'empty';
+	const CELL_STATE = [
 			'empty' => false,
 			'ship' => true
 	];
+
 	public $currentState;
 	/**
 	 * @param string $state
 	 * Задаём ячейке пустое значение при инициализации
 	 */
 	public function __construct() {
-		if ($this->currentState === null) {
-			$this->setState($this->currentState);
-		}
+		$this->setState(self::BEGIN_CELL_STATE);
 	}
 	/**
 	 * @param string $state
