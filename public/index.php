@@ -6,6 +6,7 @@ require_once implode(DIRECTORY_SEPARATOR, [
 ]);
 
 use src\controller\Controller;
+use src\database\Connection;
 
 // $whoops = new \Whoops\Run;
 // $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);

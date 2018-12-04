@@ -2,6 +2,7 @@
 
 namespace src\model;
 
+use src\database\Connection;
 /**
  * @author vova
  * Здесь вся логика игры.
@@ -35,6 +36,8 @@ class Game {
 		$this->secondField = new Field();
 		$this->writeToFile(self::FIELD_NAMES['firstField'], $this->firstField);
 		$this->writeToFile(self::FIELD_NAMES['secondField'], $this->secondField);
+		$pdo = new Connection();
+		$pdo->getConnection();
 	}
 
 	/**
