@@ -1,48 +1,54 @@
 <?php
 
 namespace src\model;
-
 /**
- *
  * @author vova
  *        
  * Класс для одной ячейки поля.
  * Есть set и get.
- *        
  */
 class Cell {
-
 	/**
-	 * @var string
-	 * @var array
+	 * @var boolean
+	 * @var boolean 
 	 */
-	const BEGIN_CELL_STATE = 'empty';
-	const CELL_STATE = [
-			'empty' => false,
-			'ship' => true
-	];
-
+	const BEGIN_STATE = false;
+	const SHIP_CELL = true;
+	/**
+	 * @var boolean
+	 * @var integer
+	 * @var integer
+	 */
 	public $currentState;
+	public $row;
+	public $column;
 	/**
-	 * @param string $state
-	 * Задаём ячейке пустое значение при инициализации
+	 * Вызываем в construct метод setState чтобы задать значения при инициализации
 	 */
-	public function __construct() {
-		$this->setState(self::BEGIN_CELL_STATE);
+	public function __construct($row, $column) {
+		$this->setState($row, $column, self::BEGIN_STATE);
 	}
 	/**
-	 * @param string $state
+	 * @param integer $row
+	 * @param integer $y
+	 * @param boolean $currentState
 	 * Функция задающая значение ячейке
 	 */
-	public function setState($state) {
-		$this->currentState = self::CELL_STATE[$state];
+	public function setState($row, $column, $state) {
+		$this->row = $row;
+		$this->column = $column;
+		if ($state === null) {
+			$this->currentState = self::SHIP_CELL;
+		} else {
+		$this->currentState = $state;
+		}
 	}
 	/**
-	 * @param string $state
-	 * @return string
-	 * Функция получающая значение ячейки
+	 * @return integer|integer|boolean
 	 */
 	public function getState() {
-		return $this->currentState;
+		return [ 
+				result => $this->currentState
+		];
 	}
 }

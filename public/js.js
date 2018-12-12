@@ -21,9 +21,8 @@ function clickHandler(e) {
 
     const x =e.target.getAttribute('x');
     const y =e.target.getAttribute('y');
-    const fieldNumber = 'firstField';
-    console.log(x, y, fieldNumber);
-    fetch('http://battleship.local?x=' + x + '&y=' + y + '&fieldNumber=' + fieldNumber)
+    console.log(x, y);
+    fetch('http://battleship.local?x=' + x + '&y=' + y)
     .then(response => {
 	return response.json()
 	})

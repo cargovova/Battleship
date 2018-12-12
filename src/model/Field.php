@@ -23,7 +23,7 @@ class Field {
 	public function __construct() {
 		for($row = 0; $row < self::COUNT_ROW; $row ++) {
 			for($column = 0; $column < self::COUNT_COLUMN; $column ++) {
-				$this->matrixCells[$row][$column] = new Cell();
+				$this->matrixCells[] = new Cell($row, $column);
 			}
 		}
 	}
@@ -34,16 +34,23 @@ class Field {
 	 * 
 	 * Записываем в ячейку корабль.
 	 */
-	public function setCellState($row, $column, $state) {
-		$this->matrixCells[$row][$column]->setState($state);
+	public function setCellState($row, $column) {
+		foreach ($this->matrixCells as $cell) {
+			if ($cell->row == $row && $cell->column == $column) {
+				$cell->setState($row, $column);
+			}
+		}
 	}
-
 	/**
 	 * @param integer $row
 	 * @param integer $column
 	 * @return string
 	 */
 	public function getCellState($row, $column) {
-		return $this->matrixCells[$row][$column]->getState();
+		foreach ($this->matrixCells as $cell) {
+			if ($cell->row == $row && $cell->column == $column) {
+				return $cell->getState();
+			}
+		}
 	}
 }

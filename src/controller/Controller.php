@@ -10,25 +10,24 @@ use src\model\Game;
  *
  */
 class Controller implements iController {
+	
 	private $game;
 
 	public function __construct() {
 		$this->game = new Game();
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * @see \src\iFace\iController::setShipsState()
+	 * @see \src\iFace\iController::setState()
 	 */
-	public function setShipsState($fieldNumber, $row, $column, $state) {
-		$this->game->setShipsState($fieldNumber, $row, $column, $state);
+	public function setState($row, $column) {
+		$this->game->setState($row, $column);
 	}
-	
 	/**
 	 * {@inheritDoc}
 	 * @see \src\iFace\iController::play()
 	 */
-	public function play($fieldNumber, $row, $column) {
-		return $this->game->play($fieldNumber, $row, $column);
+	public function play($row, $column) {
+		return $this->game->play($row, $column);
 	}
 }
