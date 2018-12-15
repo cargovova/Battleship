@@ -1,4 +1,6 @@
 'use strict';
+fetch('index.php?init',{credentials:'include'})
+
 const field = document.getElementById('field');
 
 const cells = [];
@@ -10,31 +12,26 @@ for (let row = 0; row < 10; row++) {
     for (let column = 0; column < 10; column++) {
 	const cell = document.createElement('div');
 	cell.className = 'cell';
-	cell.setAttribute('column', column);
-	cell.setAttribute('row', row);
+	cell.setAttribute('beginrow', row);
+	cell.setAttribute('begincolumn', column);
 	cell.addEventListener('click', clickHandler);
 	r.appendChild(cell);
     }
 }
 
 function clickHandler(e) {
-    const row =e.target.getAttribute('row');
-    const column =e.target.getAttribute('column');
-    console.log(row, column);
-    fetch('http://battleship.local?row=' + row + '&column=' + column)
-    .then(response => {
+    const beginrow = e.target.getAttribute('beginrow');
+    const begincolumn = e.target.getAttribute('begincolumn');
+    console.log(beginrow, begincolumn);
+    fetch('http://battleship.local?beginrow=' + beginrow + '&begincolumn=' + begincolumn)
+        .then(response => {
 	return response.json()
 	})
 	.then(data => {
 	    console.log(data);
-	    if(data.result) {
-		e.target.innerHTML = 'O'; // это большая о.
-		alert ("Победа!");
-	    } else {
-		e.target.innerHTML = 'X';
-	    }
 	})
 	.catch(err => {
 	    console.error('err');
 	});
+    e.target.innerHTML = 'O';
 }

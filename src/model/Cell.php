@@ -30,7 +30,7 @@ class Cell {
 	}
 	/**
 	 * @param integer $row
-	 * @param integer $y
+	 * @param integer $column
 	 * @param boolean $currentState
 	 * Функция задающая значение ячейке
 	 */
@@ -48,7 +48,8 @@ class Cell {
 	 */
 	public function getState() {
 		return [ 
-				result => $this->currentState
+				result => $this->currentState,
+				session => $_SESSION['matrixCells']
 		];
 	}
 }

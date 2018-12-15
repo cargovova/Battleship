@@ -13,8 +13,8 @@ class Controller implements iController {
 	
 	private $game;
 
-	public function __construct() {
-		$this->game = new Game();
+	public function __construct($matrixCells) {
+		$this->game = new Game($matrixCells);
 	}
 	/**
 	 * {@inheritDoc}
@@ -22,6 +22,10 @@ class Controller implements iController {
 	 */
 	public function setState($row, $column) {
 		$this->game->setState($row, $column);
+		return [row => $row,
+				column => $column,
+				session => $_SESSION
+		];
 	}
 	/**
 	 * {@inheritDoc}
@@ -29,5 +33,9 @@ class Controller implements iController {
 	 */
 	public function play($row, $column) {
 		return $this->game->play($row, $column);
+	}
+	
+	public function init() {
+		$_SESSION['matrixCells'] = [];
 	}
 }

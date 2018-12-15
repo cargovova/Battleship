@@ -15,8 +15,8 @@ class Game {
 	private $field;
 	private $cellState;
 
-	public function __construct() {
-		$this->field = new Field();
+	public function __construct($matrixCells) {
+		$this->field = new Field($matrixCells);
 // 		$pdo = new Connection();
 // 		$pdo->getConnection();
 	}

@@ -11,15 +11,38 @@ use src\database\Connection;
 // $whoops = new \Whoops\Run;
 // $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 // $whoops->register();
-$controller = new Controller();
+session_start();
 
-// аргументы функции из js
-$controller->setState(2, 2);
-
-// аргументы функции из js
-$row = $_REQUEST ['y'];
-$column = $_REQUEST ['x'];
-$answer = $controller->play($row, $column);
-
+if (isset($_SESSION['matrixCells'])) {
+	$matrixCells = $_SESSION['matrixCells'];
+} else {
+	$matrixCells = [];
+}
+$controller = new Controller($matrixCells);
 header('application/json');
-echo json_encode($answer);
+
+	// $beginRow = 1;
+	// $beginColumn = 1;
+// аргументы функции из js
+if (isset($_REQUEST['beginrow']) && isset($_REQUEST['begincolumn'])) {
+	$beginRow = $_REQUEST['beginrow'];
+	$beginColumn = $_REQUEST['begincolumn'];
+// 	$beginRow = 1;
+// 	$beginColumn = 1;
+	$beginAnswer = $controller->setState($beginRow, $beginColumn);
+	echo json_encode($beginAnswer);
+}
+// аргументы функции из js
+if (isset($_REQUEST['row']) && isset($_REQUEST['column'])) {
+	$row = $_REQUEST['row'];
+	$column = $_REQUEST['column'];
+	$answer = $controller->play($row, $column);
+	echo json_encode($answer);
+}
+
+if (isset($_REQUEST['init'])) {
+	$controller->init();
+	echo json_encode([state => 'clear',
+			session => $_SESSION['matrixCells']
+	]);
+}
