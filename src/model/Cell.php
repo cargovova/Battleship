@@ -47,8 +47,7 @@ class Cell {
 	 * @return integer|integer|boolean
 	 */
 	public function getState() {
-		return [ 
-				result => $this->currentState
-		];
+		return $this->currentState;
+		;
 	}
 }

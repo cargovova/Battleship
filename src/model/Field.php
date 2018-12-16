@@ -10,14 +10,13 @@ class Field {
 	 *
 	 * @var integer
 	 * @var integer
+	 * @var string
 	 */
 	const COUNT_ROW = 10;
 	const COUNT_COLUMN = 10;
-	const NAME_SESSION_VARIABLE = 'matrixCells';
+	const MATRIX_CELLS = 'matrixCells';
 	
 	private $matrixCells;
-	private $currentRow;
-	private $currentColumn;
 	/**
 	 * Создание массива
 	 * Каждый элемент массива - объект Cell.
@@ -33,7 +32,6 @@ class Field {
 			$this->matrixCells = $matrixCells;
 		}
 	}
-
 	/**
 	 * @param integer $row
 	 * @param integer $column
@@ -53,7 +51,7 @@ class Field {
 	 */
 	public function setCellState($row, $column) {
 		self::foreachMatrixCells($row, $column)->setState($row, $column);
-		$_SESSION[self::NAME_SESSION_VARIABLE] = $this->matrixCells;
+		$_SESSION[self::MATRIX_CELLS] = $this->matrixCells;
 	}
 	/**
 	 * @param integer $row
@@ -65,6 +63,6 @@ class Field {
 	}
 
 	public function init() {
-		$_SESSION[self::NAME_SESSION_VARIABLE] = [ ];
+		$_SESSION[self::MATRIX_CELLS] = [ ];
 	}
 }
