@@ -13,6 +13,7 @@ class Game {
 	 * @var object
 	 */
 	private $field;
+	private $countShip;
 
 	public function __construct($matrixCells) {
 		$this->field = new Field($matrixCells);
