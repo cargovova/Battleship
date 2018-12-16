@@ -6,17 +6,19 @@ namespace src\model;
 /**
  * @author vova
  * Здесь вся логика игры.
- * На данный момент реализовано только задание состояния одной ячейки и её угадывание.
+ * На данный момент реализовано только задание состояния ячейки и её угадывание.
  */
 class Game {
 	/**
 	 * @var object
 	 */
 	private $field;
-	private $cellState;
 
 	public function __construct($matrixCells) {
 		$this->field = new Field($matrixCells);
+		/*
+		 * Connect к базе данных.
+		 */
 // 		$pdo = new Connection();
 // 		$pdo->getConnection();
 	}
@@ -32,4 +34,8 @@ class Game {
 	public function play($row, $column) {
 		return $this->field->getCellState($row, $column);
 		}
+	
+	public function init() {
+		$this->field->init();
+	}
 }

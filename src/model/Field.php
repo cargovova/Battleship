@@ -1,7 +1,6 @@
 <?php
 
 namespace src\model;
-
 /**
  * @author vova
  *
@@ -13,11 +12,11 @@ class Field {
 	 */
 	const COUNT_ROW = 10;
 	const COUNT_COLUMN = 10;
+	const NAME_SESSION_VARIABLE = 'matrixCells';
 	
 	private $matrixCells;
-
 	/**
-	 * Создание массива и присвоение этого массива переменным $firstField и $secondField
+	 * Создание массива
 	 * Каждый элемент массива - объект Cell.
 	 */
 	public function __construct($matrixCells) {
@@ -35,8 +34,6 @@ class Field {
 	 * @param integer $row
 	 * @param integer $column
 	 * @param string $state
-	 * 
-	 * Записываем в ячейку корабль.
 	 */
 	public function setCellState($row, $column) {
 		foreach ($this->matrixCells as $cell) {
@@ -44,7 +41,7 @@ class Field {
 				$cell->setState($row, $column);
 			}
 		}
-		$_SESSION['matrixCells'] = $this->matrixCells;
+		$_SESSION[self::NAME_SESSION_VARIABLE] = $this->matrixCells;
 	}
 	/**
 	 * @param integer $row
@@ -57,5 +54,9 @@ class Field {
 				return $cell->getState();
 			}
 		}
+	}
+	
+	public function init() {
+		$_SESSION[self::NAME_SESSION_VARIABLE] = [];
 	}
 }

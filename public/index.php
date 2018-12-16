@@ -8,41 +8,40 @@ require_once implode(DIRECTORY_SEPARATOR, [
 use src\controller\Controller;
 use src\database\Connection;
 
+const NAME_MATRIXCELLS = 'matrixCells';
+const NAME_BEGIN_ROW = 'beginrow';
+const NAME_BEGIN_COLUMN = 'begincolumn';
+const NAME_ROW = 'row';
+const NAME_COLUMN = 'column';
+const NAME_INIT = 'init';
 // $whoops = new \Whoops\Run;
 // $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 // $whoops->register();
 session_start();
 
-if (isset($_SESSION['matrixCells'])) {
-	$matrixCells = $_SESSION['matrixCells'];
+if (isset($_SESSION[NAME_MATRIXCELLS])) {
+	$matrixCells = $_SESSION[NAME_MATRIXCELLS];
 } else {
 	$matrixCells = [];
 }
 $controller = new Controller($matrixCells);
 header('application/json');
 
-	// $beginRow = 1;
-	// $beginColumn = 1;
 // аргументы функции из js
-if (isset($_REQUEST['beginrow']) && isset($_REQUEST['begincolumn'])) {
-	$beginRow = $_REQUEST['beginrow'];
-	$beginColumn = $_REQUEST['begincolumn'];
-// 	$beginRow = 1;
-// 	$beginColumn = 1;
+if (isset($_REQUEST[NAME_BEGIN_ROW]) && isset($_REQUEST[NAME_BEGIN_COLUMN])) {
+	$beginRow = $_REQUEST[NAME_BEGIN_ROW];
+	$beginColumn = $_REQUEST[NAME_BEGIN_COLUMN];
 	$beginAnswer = $controller->setState($beginRow, $beginColumn);
 	echo json_encode($beginAnswer);
 }
 // аргументы функции из js
-if (isset($_REQUEST['row']) && isset($_REQUEST['column'])) {
-	$row = $_REQUEST['row'];
-	$column = $_REQUEST['column'];
+if (isset($_REQUEST[NAME_ROW]) && isset($_REQUEST[NAME_COLUMN])) {
+	$row = $_REQUEST[NAME_ROW];
+	$column = $_REQUEST[NAME_COLUMN];
 	$answer = $controller->play($row, $column);
 	echo json_encode($answer);
 }
 
-if (isset($_REQUEST['init'])) {
+if (isset($_REQUEST[NAME_INIT])) {
 	$controller->init();
-	echo json_encode([state => 'clear',
-			session => $_SESSION['matrixCells']
-	]);
 }

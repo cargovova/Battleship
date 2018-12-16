@@ -48,8 +48,7 @@ class Cell {
 	 */
 	public function getState() {
 		return [ 
-				result => $this->currentState,
-				session => $_SESSION['matrixCells']
+				result => $this->currentState
 		];
 	}
 }

@@ -22,10 +22,6 @@ class Controller implements iController {
 	 */
 	public function setState($row, $column) {
 		$this->game->setState($row, $column);
-		return [row => $row,
-				column => $column,
-				session => $_SESSION
-		];
 	}
 	/**
 	 * {@inheritDoc}
@@ -34,8 +30,11 @@ class Controller implements iController {
 	public function play($row, $column) {
 		return $this->game->play($row, $column);
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 * @see \src\iFace\iController::init()
+	 */
 	public function init() {
-		$_SESSION['matrixCells'] = [];
+		$this->game->init();
 	}
 }
