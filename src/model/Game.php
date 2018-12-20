@@ -28,9 +28,10 @@ class Game {
 	}
 	/**
 	 * @return boolean
+	 * Обе величины увеличиваются на 1, поэтому можно их сравнивать.
 	 */
 	public function compareVariable() {
-		if ($_SESSION[self::COUNT_SHIP] === $_SESSION[self::COUNT_HIT]) {
+		if (Singleton::getShipInstance() === Singleton::getHitInstance()) {
 			return true;
 		}
 	}
@@ -40,11 +41,7 @@ class Game {
 	 */
 	public function setState($row, $column) {
 		$this->field->setCellState($row,$column);
-		if (isset($_SESSION[self::COUNT_SHIP])) {
-			++$_SESSION[self::COUNT_SHIP];
-		} else {
-			$_SESSION[self::COUNT_SHIP] = self::FIRST_SHIP;
-		}
+		return [countShip => Singleton::getShipInstance()];
 	}
 	/**
 	 * @param integer $row
@@ -53,14 +50,9 @@ class Game {
 	 */
 	public function play($row, $column) {
 		$this->sellState = $this->field->getCellState($row, $column);
-		if (isset($_SESSION[self::COUNT_HIT])) {
-			++$_SESSION[self::COUNT_HIT];
-		} else {
-			$_SESSION[self::COUNT_HIT] = self::FIRST_SHIP;
-		}
 		return [
 				result => $this->sellState,
-				iswin => self::compareVariable()
+				iswin => Singleton::getHitInstance()
 		];
 	}
 

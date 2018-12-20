@@ -21,7 +21,7 @@ class Controller implements iController {
 	 * @see \src\iFace\iController::setState()
 	 */
 	public function setState($row, $column) {
-		$this->game->setState($row, $column);
+		return $this->game->setState($row, $column);
 	}
 	/**
 	 * {@inheritDoc}
