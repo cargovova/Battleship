@@ -1,5 +1,5 @@
 'use strict';
-fetch('index.php?init',{credentials:'include'})
+//fetch('index.php?init',{credentials:'include'})
 
 const field = document.getElementById('field');
 

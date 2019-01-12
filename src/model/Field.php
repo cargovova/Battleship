@@ -2,6 +2,8 @@
 
 namespace src\model;
 
+use src\database\Connection;
+
 /**
  * @author vova
  */
@@ -15,21 +17,18 @@ class Field {
 	const COUNT_ROW = 10;
 	const COUNT_COLUMN = 10;
 	const MATRIX_CELLS = 'matrixCells';
+	const BEGIN_FIELD = 'begin_field';
 	
 	private $matrixCells;
 	/**
-	 * Создание массива
-	 * Каждый элемент массива - объект Cell.
+	 * Заполнение таблицы begin_field значениями true
 	 */
-	public function __construct($matrixCells) {
-		if (count($matrixCells) === 0) {
-			for($row = 0; $row < self::COUNT_ROW; $row ++) {
-				for($column = 0; $column < self::COUNT_COLUMN; $column ++) {
-					$this->matrixCells[] = new Cell($row, $column);
-				}
+	public function __construct ($matrixCells) {
+		for ($row = 0; $row < self::COUNT_ROW; $row ++) {
+			for ($column = 0; $column < self::COUNT_COLUMN; $column ++) {
+				$cell = new Cell ($row, $column);
+				Connection::insertInto (self::BEGIN_FIELD, $cell->row, $cell->column, $cell->currentState);
 			}
-		} else {
-			$this->matrixCells = $matrixCells;
 		}
 	}
 	/**
@@ -64,5 +63,6 @@ class Field {
 
 	public function init() {
 		$_SESSION[self::MATRIX_CELLS] = [ ];
+		
 	}
 }

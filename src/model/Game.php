@@ -2,7 +2,6 @@
 
 namespace src\model;
 
-//use src\database\Connection;
 /**
  * @author vova
  * Здесь вся логика игры.
@@ -20,11 +19,6 @@ class Game {
 
 	public function __construct($matrixCells) {
 		$this->field = new Field($matrixCells);
-		/*
-		 * Connect к базе данных.
-		 */
-// 		$pdo = new Connection();
-// 		$pdo->getConnection();
 	}
 	/**
 	 * @return boolean
@@ -33,6 +27,8 @@ class Game {
 	public function compareVariable() {
 		if (Singleton::getShipInstance() === Singleton::getHitInstance()) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 	/**
@@ -52,7 +48,9 @@ class Game {
 		$this->sellState = $this->field->getCellState($row, $column);
 		return [
 				result => $this->sellState,
-				iswin => Singleton::getHitInstance()
+				iswin => self::compareVariable(),
+				first => Singleton::getShipInstance(),
+				second => Singleton::getHitInstance()
 		];
 	}
 
